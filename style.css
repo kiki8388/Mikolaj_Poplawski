@@ -2,8 +2,9 @@
 {
   text-align: center;
   margin: 0 auto;
-  background-color: #6610f2;
+  background-color: #33733C;
   height: 50px;
-  font-size: 20px;
-  font-type: bold;
+  font-size: 40px;
+  font: bold;
+  color: #F0EE9A;
 }
