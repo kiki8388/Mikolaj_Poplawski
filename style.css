@@ -8,6 +8,8 @@ header
   font-size: 40px;
   font-weight: bold;
   color: #F0EE9A;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 .glow
 {
@@ -65,7 +67,15 @@ body
   color: #F0EE9A;
   margin-left: 15%;
   margin-right: 15%;
-  min-height: 1000px;
+  min-height: 1200px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+section
+{
+ height: 850px;
 }
 article
 {
@@ -73,14 +83,12 @@ article
   padding: 20px;
   width: 70%;
   text-align: justify;
-  height: 700px;
 }
 aside ul
 {
   text-align: center;
   list-style-type: none;
-  padding: 20px;
-  height: 700px;
+  padding-top: 20px;
 }
 html
 {
@@ -89,6 +97,5 @@ html
 }
 footer
 {
-  margin-top: 20px;
   text-align: center;
 }
