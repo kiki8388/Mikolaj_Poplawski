@@ -30,6 +30,8 @@ nav
   color: #F0EE9A;
   height: 40px;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 .button
 {
@@ -44,6 +46,7 @@ nav
   display: inline-block;
   font-size: 17px;
   transition-duration: 0.4s;
+  float: left;
 }
 .button:hover
 {
@@ -74,7 +77,7 @@ body
 }
 section
 {
- height: 850px;
+ height: 950px;
 }
 article
 {
