@@ -30,11 +30,10 @@ nav
   color: #F0EE9A;
   height: 40px;
   width: 100%;
-  text-align: justify;
 }
 .button
 {
-  background-color: #184501; /* Green */
+  background-color: #184501;
   border: none;
   color: #F0EE9A;
   height: 40px;
