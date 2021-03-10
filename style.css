@@ -54,6 +54,26 @@ nav
   cursor: pointer;
   animation: glowb 1s ease-in-out infinite alternate;
 }
+.fbutton
+{
+  background-color: #184501;
+  border: none;
+  color: #F0EE9A;
+  height: 40px;
+  line-height: 40px;
+  width: 25%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  transition-duration: 0.4s;
+}
+.fbutton:hover
+{
+  background-color: black;
+  cursor: pointer;
+  animation: glowb 1s ease-in-out infinite alternate;
+}
 @-webkit-keyframes glowb {
   from {
     text-shadow: 0 0 10px #ffffff, 0 0 20px #fff, 0 0 30px #ffdf69, 0 0 40px #ffdf69, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
