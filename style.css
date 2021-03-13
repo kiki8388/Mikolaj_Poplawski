@@ -101,6 +101,12 @@ section
 {
  height: 950px;
 }
+h2
+{
+  float: left;
+  padding-left: 20px;
+  width: 70%;
+}
 article
 {
   float: left;
