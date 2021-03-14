@@ -97,21 +97,20 @@ body
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
 }
-section
-{
- height: 950px;
-}
 h2
 {
   float: left;
   padding-left: 20px;
+  width: 100%;
+}
+section
+{
+  float: left;
   width: 70%;
 }
 article
 {
-  float: left;
   padding: 20px;
-  width: 70%;
   text-align: justify;
 }
 aside ul
@@ -119,6 +118,10 @@ aside ul
   text-align: center;
   list-style-type: none;
   padding-top: 40px;
+}
+aside
+{
+  height: 950px;
 }
 html
 {
