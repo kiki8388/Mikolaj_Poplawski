@@ -1,15 +1,15 @@
 const fieldsElements = document.querySelectorAll(".box");
-const panel = document.querySelector('.panel');
+const message = document.querySelector('.message');
 const button = document.querySelector('.reset-button');
 
 let fields = ['', '', '', '', '', '', '', '', ''];
 let activePlayer = "X";
-let gameActive = true;
+let isGameActive = true;
 
 const setDefaults = () => {
     fields = ['', '', '', '', '', '', '', '', ''];
     activePlayer = "X";
-    gameActive = true;
+    isGameActive = true;
 }
 
 const winningConditions = [
@@ -23,51 +23,50 @@ const winningConditions = [
     [2, 4, 6]
 ]
 
-const validateGame = () => {
-    let gameWon = false;
-    for (let i = 0; i < 7; ++i) {
-        const [posA, posB, posC] = winningConditions[i];
-        const value1 = fields[posA];
-        const value2 = fields[posB];
-        const value3 = fields[posC];
-
-        if (value1 === value2 && value1 === value3 && value1 !== "") {
-            gameWon = true;
-            break;
-            //panel.innerText = 'Wygrałeś!';
-        }
-    }
-    if (gameWon) {
-        gameActive = false;
-        displayWinMessage();
-    } else if (isBoardFull()) {
-        gameActive = false;
-        displayDrawMessage();
-    }
-}
-
 const isBoardFull = () => {
     return fields.find(field => field === "") === undefined;
 }
 
-const displayWinMessage = () => {
-    panel.innerText = `Wygrałeś ${activePlayer}, brawo!`
+const winMessage = () => {
+    message.innerText = `Wygrała osoba grająca ${activePlayer}, brawo!`;
 }
 
-const displayDrawMessage = () => {
-    panel.innerText = `Remis!`
+const drawMessage = () => {
+    message.innerText = "Remis!";
 }
 
-const clearPanel = () => {
-    panel.innerText = "";
+const clearMessage = () => {
+    message.innerText = "";
+}
+
+const validateGame = () => {
+    let gameWon = false;
+    for (let i = 0; i < 7; ++i) {
+        const [positionA, positionB, positionC] = winningConditions[i];
+        const a = fields[positionA];
+        const b = fields[positionB];
+        const c = fields[positionC];
+
+        if (a === b && a === c && a !== "") {
+            gameWon = true;
+            break;
+        }
+    }
+    if (gameWon) {
+        isGameActive = false;
+        winMessage();
+    } else if (isBoardFull()) {
+        isGameActive = false;
+        drawMessage();
+    }
 }
 
 fieldsElements.forEach((field) => {
     field.addEventListener("click", (e) => {
-        const {pos} = e.target.dataset;
+        const {position} = e.target.dataset;
 
-        if (gameActive && fields[pos] === "") {
-            fields[pos] = activePlayer;
+        if (isGameActive && fields[position] === "") {
+            fields[position] = activePlayer;
             e.target.classList.add(`box--filled-${activePlayer}`);
             validateGame();
             activePlayer = activePlayer === 'X' ? 'O' : 'X';
@@ -75,16 +74,16 @@ fieldsElements.forEach((field) => {
     })
 })
 
-const resetBoardClasses = () => {
+const resetBoard = () => {
     fieldsElements.forEach(field => {
         field.classList.remove("box--filled-X", "box--filled-O");
     })
 }
 
-const handleButtonClick = () => {
+const resetButtonClick = () => {
     setDefaults();
-    resetBoardClasses();
-    clearPanel();
+    resetBoard();
+    clearMessage();
 }
 
-button.addEventListener("click", handleButtonClick)
+button.addEventListener("click", resetButtonClick)
