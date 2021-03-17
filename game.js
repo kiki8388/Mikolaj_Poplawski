@@ -24,6 +24,7 @@ const winningConditions = [
 ]
 
 const validateGame = () => {
+    let gameWon = false;
     for (let i = 0; i < 7; ++i) {
         const [posA, posB, posC] = winningConditions[i];
         const value1 = fields[posA];
@@ -31,15 +32,30 @@ const validateGame = () => {
         const value3 = fields[posC];
 
         if (value1 === value2 && value1 === value3 && value1 !== "") {
-            gameActive = false;
-            displayWinMessage();
+            gameWon = true;
+            break;
             //panel.innerText = 'Wygrałeś!';
         }
     }
+    if (gameWon) {
+        gameActive = false;
+        displayWinMessage();
+    } else if (isBoardFull()) {
+        gameActive = false;
+        displayDrawMessage();
+    }
+}
+
+const isBoardFull = () => {
+    return fields.find(field => field === "") === undefined;
 }
 
 const displayWinMessage = () => {
     panel.innerText = `Wygrałeś ${activePlayer}, brawo!`
+}
+
+const displayDrawMessage = () => {
+    panel.innerText = `Remis!`
 }
 
 const clearPanel = () => {
@@ -59,11 +75,15 @@ fieldsElements.forEach((field) => {
     })
 })
 
-const handleButtonClick = () => {
-    setDefaults();
+const resetBoardClasses = () => {
     fieldsElements.forEach(field => {
         field.classList.remove("box--filled-X", "box--filled-O");
     })
+}
+
+const handleButtonClick = () => {
+    setDefaults();
+    resetBoardClasses();
     clearPanel();
 }
 
