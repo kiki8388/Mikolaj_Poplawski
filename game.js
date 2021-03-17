@@ -21,7 +21,7 @@ const winningConditions = [
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-]
+];
 
 const isBoardFull = () => {
     return fields.find(field => field === "") === undefined;
@@ -41,7 +41,7 @@ const clearMessage = () => {
 
 const validateGame = () => {
     let gameWon = false;
-    for (let i = 0; i < 7; ++i) {
+    for (let i = 0; i < 8; ++i) {
         const [positionA, positionB, positionC] = winningConditions[i];
         const a = fields[positionA];
         const b = fields[positionB];
