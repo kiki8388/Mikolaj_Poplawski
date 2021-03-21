@@ -1,6 +1,6 @@
 const fieldsElements = document.querySelectorAll(".box");
-const message = document.querySelector('.message');
-const button = document.querySelector('.reset-button');
+const message = document.querySelector(".message");
+const button = document.querySelector(".reset-button");
 
 let fields = ['', '', '', '', '', '', '', '', ''];
 let activePlayer = "X";
