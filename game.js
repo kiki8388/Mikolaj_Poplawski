@@ -1,89 +1,112 @@
-const fieldsElements = document.querySelectorAll(".box");
-const message = document.querySelector(".message");
-const button = document.querySelector(".reset-button");
+class Game {
+    fields;
+    activePlayer;
+    isGameActive;
 
-let fields = ['', '', '', '', '', '', '', '', ''];
-let activePlayer = "X";
-let isGameActive = true;
+    winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
 
-const setDefaults = () => {
-    fields = ['', '', '', '', '', '', '', '', ''];
-    activePlayer = "X";
-    isGameActive = true;
-}
+    constructor() {
+        this.setDefaults();
+        this.board = new Board(this.itemClick, this.resetButtonClick);
+    }
 
-const winningConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
+    validateGame = () => {
+        let gameWon = false;
+        for (let i = 0; i < 8; ++i) {
+            const [positionA, positionB, positionC] = this.winningConditions[i];
+            const a = this.fields[positionA];
+            const b = this.fields[positionB];
+            const c = this.fields[positionC];
 
-const isBoardFull = () => {
-    return fields.find(field => field === "") === undefined;
-}
-
-const winMessage = () => {
-    message.innerText = `Wygrała osoba grająca ${activePlayer}, brawo!`;
-}
-
-const drawMessage = () => {
-    message.innerText = "Remis!";
-}
-
-const clearMessage = () => {
-    message.innerText = "";
-}
-
-const validateGame = () => {
-    let gameWon = false;
-    for (let i = 0; i < 8; ++i) {
-        const [positionA, positionB, positionC] = winningConditions[i];
-        const a = fields[positionA];
-        const b = fields[positionB];
-        const c = fields[positionC];
-
-        if (a === b && a === c && a !== "") {
-            gameWon = true;
-            break;
+            if (a === b && a === c && a !== "") {
+                gameWon = true;
+                break;
+            }
         }
-    }
-    if (gameWon) {
-        isGameActive = false;
-        winMessage();
-    } else if (isBoardFull()) {
-        isGameActive = false;
-        drawMessage();
-    }
-}
+        if (gameWon) {
+            this.isGameActive = false;
+            this.board.winMessage(this.activePlayer);
+        } else if (this.isBoardFull()) {
+            this.isGameActive = false;
+            this.board.drawMessage();
+        }
+    };
 
-fieldsElements.forEach((field) => {
-    field.addEventListener("click", (e) => {
+    isBoardFull = () => {
+        return this.fields.find(field => field === "") === undefined;
+    };
+
+    resetButtonClick = () => {
+        this.setDefaults();
+        resetBoard();
+        clearMessage();
+    };
+
+    itemClick = e => {
         const {position} = e.target.dataset;
 
-        if (isGameActive && fields[position] === "") {
-            fields[position] = activePlayer;
-            e.target.classList.add(`box--filled-${activePlayer}`);
-            validateGame();
-            activePlayer = activePlayer === 'X' ? 'O' : 'X';
+        if (this.isGameActive && this.fields[position] === "") {
+            this.fields[position] = this.activePlayer;
+            e.target.classList.add(`box--filled-${this.activePlayer}`);
+            this.validateGame();
+            this.activePlayer = this.activePlayer === 'X' ? 'O' : 'X';
         }
-    })
-})
+    };
 
-const resetBoard = () => {
-    fieldsElements.forEach(field => {
-        field.classList.remove("box--filled-X", "box--filled-O");
-    })
+    setDefaults = () => {
+        this.fields = ['', '', '', '', '', '', '', '', ''];
+        this.activePlayer = "X";
+        this.isGameActive = true;
+    };
+
 }
 
-const resetButtonClick = () => {
-    setDefaults();
-    resetBoard();
-    clearMessage();
+class Board {
+    fieldsElements = document.querySelectorAll(".box");
+    message = document.querySelector(".message");
+    button = document.querySelector(".reset-button");
+
+    constructor(onItemClick, onButtonClick) {
+        this.onButtonClick = onButtonClick;
+        this.button.addEventListener("click", this.resetButtonClick);
+
+        this.fieldsElements.forEach((field) => {
+            field.addEventListener("click", onItemClick)
+        });
+    }
+
+    resetButtonClick = () => {
+        this.resetBoard();
+        this.clearMessage();
+        this.onButtonClick();
+    }
+
+    resetBoard = () => {
+        this.fieldsElements.forEach(field => {
+            field.classList.remove("box--filled-X", "box--filled-O");
+        });
+    };
+
+    winMessage = (activePlayer) => {
+        this.message.innerText = `Wygrała osoba grająca ${activePlayer}, brawo!`;
+    };
+
+    drawMessage = () => {
+        this.message.innerText = "Remis!";
+    };
+
+    clearMessage = () => {
+        this.message.innerText = "";
+    };
 }
 
-button.addEventListener("click", resetButtonClick)
+const game = new Game();
