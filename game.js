@@ -3,6 +3,8 @@ class Game {
     activePlayer;
     isGameActive;
 
+    currentMode = null;
+
     winningConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -16,7 +18,7 @@ class Game {
 
     constructor() {
         this.setDefaults();
-        this.board = new Board(this.itemClick, this.resetButtonClick);
+        this.board = new Board(this.itemClick, this.resetButtonClick, this.modeChange);
     }
 
     validateGame = () => {
@@ -45,22 +47,39 @@ class Game {
         return this.fields.find(field => field === "") === undefined;
     };
 
+    modeChange = (e) => {
+        this.currentMode = this.getMode(e.target.value);
+        this.setDefaults();
+        this.board.reset();
+    }
+
+    getMode = (name) => {
+        if (name === "bot") return new GameBot();
+        return null;
+    }
+
     resetButtonClick = () => {
         this.setDefaults();
-        resetBoard();
-        clearMessage();
     };
 
-    itemClick = e => {
+    itemClick = (e) => {
         const {position} = e.target.dataset;
 
         if (this.isGameActive && this.fields[position] === "") {
-            this.fields[position] = this.activePlayer;
-            e.target.classList.add(`box--filled-${this.activePlayer}`);
-            this.validateGame();
-            this.activePlayer = this.activePlayer === 'X' ? 'O' : 'X';
+            this.makeMove(position);
+
+            if (this.currentMode !== null && this.isGameActive) {
+                this.makeMove(this.currentMode.getMove(this.fields, this.activePlayer));
+            }
         }
     };
+
+    makeMove = (position) => {
+        this.fields[position] = this.activePlayer;
+        this.board.getField(position).classList.add(`box--filled-${this.activePlayer}`);
+        this.validateGame();
+        this.activePlayer = this.activePlayer === 'X' ? 'O' : 'X';
+    }
 
     setDefaults = () => {
         this.fields = ['', '', '', '', '', '', '', '', ''];
@@ -74,20 +93,26 @@ class Board {
     fieldsElements = document.querySelectorAll(".box");
     message = document.querySelector(".message");
     button = document.querySelector(".reset-button");
+    modeSelect = document.querySelector("#mode");
 
-    constructor(onItemClick, onButtonClick) {
+    constructor(onItemClick, onButtonClick, onModeChange) {
         this.onButtonClick = onButtonClick;
         this.button.addEventListener("click", this.resetButtonClick);
 
         this.fieldsElements.forEach((field) => {
             field.addEventListener("click", onItemClick)
         });
+        this.modeSelect.addEventListener("change", onModeChange);
     }
 
     resetButtonClick = () => {
+        this.reset();
+        this.onButtonClick();
+    }
+
+    reset = () => {
         this.resetBoard();
         this.clearMessage();
-        this.onButtonClick();
     }
 
     resetBoard = () => {
@@ -95,6 +120,10 @@ class Board {
             field.classList.remove("box--filled-X", "box--filled-O");
         });
     };
+
+    getField = (position) => {
+        return this.fieldsElements[position];
+    }
 
     winMessage = (activePlayer) => {
         this.message.innerText = `Wygrała osoba grająca ${activePlayer}, brawo!`;
@@ -106,6 +135,14 @@ class Board {
 
     clearMessage = () => {
         this.message.innerText = "";
+    };
+}
+
+class GameBot {
+    getMove = (fields, activePlayer) => {
+        const emptyIndexes = Object.entries(fields).filter((fieldEntry) => fieldEntry[1] === "").map((fieldEntry) => fieldEntry[0]);
+        const randomPositionIndex = Math.floor(Math.random() * emptyIndexes.length);
+        return emptyIndexes[randomPositionIndex];
     };
 }
 

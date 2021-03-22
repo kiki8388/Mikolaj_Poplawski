@@ -197,10 +197,21 @@ footer {
     content: "X";
     font-family: Arial;
 }
+
 .box--filled-O::before {
     position: absolute;
     content: "O";
     font-family: Arial;
+}
+
+.selection {
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+select {
+    background-color: #184501;
+    color: #F0EE9A;
 }
 
 
