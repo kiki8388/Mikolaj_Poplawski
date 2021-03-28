@@ -125,7 +125,8 @@ body {
 h2 {
     float: left;
     padding-left: 20px;
-    width: 100%;
+    width: 97.5%;
+    background-color: #184501;
 }
 
 .content {
