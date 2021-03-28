@@ -67,7 +67,6 @@ nav {
     display: inline-block;
     font-size: 17px;
     transition-duration: 0.4s;
-    position: center;
 }
 
 .fbutton:hover {
@@ -159,14 +158,12 @@ aside ul {
     list-style-type: none;
     /*padding-top: 40px;*/
     /*padding-bottom: 40px;*/
-    position: center;
 }
 
 aside ul li {
     color: #F0EE9A;
     /*padding-top: 30px;*/
     width: 100%;
-    position: center;
     background-color: #275C14;
     height: 40px;
     text-align: center;
@@ -196,7 +193,6 @@ html {
 }
 
 footer {
-    position: center;
     text-align: center;
 }
 
