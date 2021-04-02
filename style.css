@@ -2,6 +2,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     background-color: #33733C;
     height: 90px;
     font-size: 40px;
@@ -168,6 +169,7 @@ aside ul li {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: #F0EE9A;
     background-color: #275C14;
     /*padding: 20px;*/
