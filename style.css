@@ -299,7 +299,15 @@ select {
     }
 
     aside ul {
-        margin-right: 30px;
+        margin-right: 40px;
+    }
+
+    .fbutton {
+        width: 50%;
+    }
+
+    .reset-button {
+        width: 50%;
     }
 
 }
