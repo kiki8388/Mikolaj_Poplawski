@@ -159,7 +159,7 @@ aside ul {
     flex-direction: column;
     align-content: flex-start;
     margin-right: 80px;
-    height: 100%;
+    /*height: 100%;*/
     list-style-type: none;
     /*padding-top: 40px;*/
     /*padding-bottom: 40px;*/
@@ -276,6 +276,41 @@ select {
     height: 40px;
     width: 100%;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+    nav {
+        flex-direction: column;
+        flex: 100%;
+        align-items: center;
+        height: 160px;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    body {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    aside ul {
+        margin-right: 30px;
+    }
+
+}
+
+
+
+
+
+
+
+
 
 /* For mobile phones: */
 [class*="col-"] {
