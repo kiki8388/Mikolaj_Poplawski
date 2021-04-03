@@ -312,7 +312,7 @@ select {
     }
 
     .board {
-        width: 180px;
-        grid-template-rows: repeat(3, 60px);
+        width: 210px;
+        grid-template-rows: repeat(3, 70px);
     }
 }
