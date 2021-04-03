@@ -241,6 +241,7 @@ footer {
 }
 
 .message {
+    text-align: center;
     font-size: 24px;
 }
 
@@ -281,7 +282,7 @@ select {
     box-sizing: border-box;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
     nav {
         flex-direction: column;
         flex: 100%;
@@ -310,6 +311,10 @@ select {
         width: 50%;
     }
 
+    .board {
+        width: 180px;
+        grid-template-rows: repeat(3, 60px);
+    }
 }
 
 
