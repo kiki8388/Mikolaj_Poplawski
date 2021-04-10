@@ -136,7 +136,7 @@ h2 {
 
 .main {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 .home {
@@ -299,8 +299,23 @@ select {
         margin-right: 5%;
     }
 
+    aside {
+        justify-content: flex-start;
+
+    }
+
     aside ul {
-        margin-right: 40px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-right: 0;
+        width:100%;
+    }
+
+    aside ul li {
+
+        width: 25%;
+        margin-right: 7.5%;
     }
 
     .fbutton {
@@ -314,5 +329,13 @@ select {
     .board {
         width: 210px;
         grid-template-rows: repeat(3, 70px);
+    }
+
+    .home {
+        width: 100%;
+    }
+
+    .main {
+        flex-direction: column;
     }
 }
