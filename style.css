@@ -268,7 +268,7 @@ select {
 }
 
 .message-label {
-    min-height: 50px;
+    min-height: 80px;
 }
 
 .break {
@@ -331,6 +331,42 @@ select {
     .board {
         width: 210px;
         grid-template-rows: repeat(3, 70px);
+    }
+
+    .home {
+        width: 100%;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1000px) {
+    body {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    aside {
+
+        justify-content: center;
+
+    }
+
+    aside ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-right: 0;
+        margin-left: -38px;
+        width:100%;
+    }
+
+    aside ul li {
+        width: 25%;
+        margin-right: 1%;
+        /*margin-left: -13%;*/
     }
 
     .home {
