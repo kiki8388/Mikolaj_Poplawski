@@ -300,22 +300,24 @@ select {
     }
 
     aside {
-        justify-content: flex-start;
+
+        justify-content: center;
 
     }
 
     aside ul {
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         margin-right: 0;
+        margin-left: -38px;
         width:100%;
     }
 
     aside ul li {
-
         width: 25%;
-        margin-right: 7.5%;
+        margin-right: 1%;
+        /*margin-left: -13%;*/
     }
 
     .fbutton {
